@@ -1,8 +1,8 @@
 {
-  "name": "node-multiconfig",
+  "name": "@nukr/multiconfig",
   "version": "0.1.0",
   "description": "multiconfig for node",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "ava test"
   },
