@@ -7,7 +7,7 @@ No more process.env for your config
 
 ## Install
 ```bash
-npm install @nukr/multiconfig
+npm install @nukr/multiconfig --save
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ before
 
 after
 ```javascript
-  import multiconfig from 'multiconfig'
+  import multiconfig from '@nukr/multiconfig'
   export default multiconfig({
     app: {
       port: 3000
