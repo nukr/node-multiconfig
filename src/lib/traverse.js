@@ -15,7 +15,7 @@ export default function traverse (node, env = []) {
         if (typeof process.env[env_var] !== 'undefined') {
           node[key] = parseInt(process.env[env_var])
         } else {
-          node[key] = tmp
+          node[key] = process.env[env_var] || tmp
         }
       }
     }
