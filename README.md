@@ -1,11 +1,13 @@
 # node-multiconfig
+[![Build Status](http://ci.meepshop.tw/api/badges/nukr/node-multiconfig/status.svg)](http://ci.meepshop.tw/nukr/node-multiconfig)
 
 inspire by [multiconfig](https://github.com/koding/multiconfig)
 
 No more process.env for your config
 
+before
 ```javascript
-  const config = {
+  export default {
     app: {
       port: process.env.APP_PORT || 3000
     },
@@ -17,7 +19,10 @@ No more process.env for your config
       host: process.env.ES_HOST || 'localhost:9200'
     }
   }
-  // instead of
+```
+
+after
+```javascript
   import multiconfig from 'multiconfig'
   export default multiconfig({
     app: {
@@ -32,3 +37,7 @@ No more process.env for your config
     }
   })
 ```
+
+## Special Thanks
+- [yan771012](https://github.com/yan771012)
+- [lbeeon](https://github.com/lbeeon)
