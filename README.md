@@ -5,6 +5,12 @@ inspire by [multiconfig](https://github.com/koding/multiconfig)
 
 No more process.env for your config
 
+## Install
+```bash
+npm install @nukr/multiconfig
+```
+
+## Usage
 before
 ```javascript
   export default {

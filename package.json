@@ -1,10 +1,11 @@
 {
   "name": "@nukr/multiconfig",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "multiconfig for node",
   "main": "dist/index.js",
   "scripts": {
-    "test": "ava test"
+    "test": "ava test",
+    "prepublish": "babel src -d dist"
   },
   "ava": {
     "require": [

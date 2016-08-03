@@ -1,6 +1,13 @@
 import test from 'ava'
 import multiconfig from '../src'
 
+test.before(() => {
+  process.env.APP_PORT = 3000
+  process.env.RETHINKDB_HOST = 'localhost'
+  process.env.RETHINKDB_PORT = 28015
+  process.env.ES_HOST = 'localhost:9200'
+})
+
 test('traverse', (t) => {
   const config = {
     app: {

@@ -17,6 +17,8 @@ export default function traverse (node, env = []) {
         } else {
           node[key] = process.env[env_var] || tmp
         }
+      } else {
+        node[key] = process.env[env_var] || tmp
       }
     }
   })
