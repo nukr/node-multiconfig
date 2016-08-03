@@ -2,6 +2,7 @@ function is_object (obj) {
   return (typeof obj === 'object' && obj !== null)
 }
 
+// TODO: no mutate input
 export default function traverse (node, env = []) {
   const keys = Object.keys(node)
   keys.forEach(key => {
