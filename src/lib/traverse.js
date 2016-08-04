@@ -11,7 +11,7 @@ export default function traverse (node, env = []) {
     } else {
       const env_var = [...env, key].join('_').toUpperCase()
       if (typeof node[key] === 'number') {
-        node[key] = parseInt(process.env[env_var]) || node[key]
+        node[key] = Number(process.env[env_var]) || node[key]
       } else if (Array.isArray(node[key])) {
         try {
           node[key] = process.env[env_var] && JSON.parse(process.env[env_var]) || node[key]
