@@ -8,20 +8,20 @@ test.before(() => {
   process.env.ES_HOST = 'localhost:9200'
 })
 
-test('traverse', (t) => {
-  const config = {
-    app: {
-      port: 3000
-    },
-    rethinkdb: {
-      host: 'localhost',
-      port: 28015
-    },
-    es: {
-      host: 'localhost:9200'
-    }
+const default_config = {
+  app: {
+    port: 3000
+  },
+  rethinkdb: {
+    host: 'localhost',
+    port: 28015
+  },
+  es: {
+    host: 'localhost:9200'
   }
+}
 
+test('traverse', (t) => {
   process.env.APP_PORT = '12345'
 
   const expected = {
@@ -37,25 +37,12 @@ test('traverse', (t) => {
     }
   }
 
-  const target_config = multiconfig(config)
+  const target_config = multiconfig(default_config)
 
   t.deepEqual(target_config, expected)
 })
 
 test('no mutate config', (t) => {
-  const config = {
-    app: {
-      port: 3000
-    },
-    rethinkdb: {
-      host: 'localhost',
-      port: 28015
-    },
-    es: {
-      host: 'localhost:9200'
-    }
-  }
-
   process.env.APP_PORT = 12345
 
   const expected = {
@@ -71,23 +58,13 @@ test('no mutate config', (t) => {
     }
   }
 
-  multiconfig(config)
+  const config = multiconfig(default_config)
 
   t.not(config, expected)
 })
 
 test('deeper', (t) => {
-  const config = {
-    app: {
-      port: 3000
-    },
-    rethinkdb: {
-      host: 'localhost',
-      port: 28015
-    },
-    es: {
-      host: 'localhost:9200'
-    },
+  const deeper_config = {
     user: {
       name: 'nukr',
       password: '12345',
@@ -96,21 +73,10 @@ test('deeper', (t) => {
       }
     }
   }
-
   process.env.APP_PORT = '12345'
   process.env.USER_SKILLS_CS = 'gg'
 
   const expected = {
-    app: {
-      port: 12345
-    },
-    rethinkdb: {
-      host: 'localhost',
-      port: 28015
-    },
-    es: {
-      host: 'localhost:9200'
-    },
     user: {
       name: 'nukr',
       password: '12345',
@@ -120,23 +86,13 @@ test('deeper', (t) => {
     }
   }
 
-  const target_config = multiconfig(config)
+  const target_config = multiconfig(deeper_config)
 
   t.deepEqual(target_config, expected)
 })
 
 test('array', (t) => {
   const config = {
-    app: {
-      port: 3000
-    },
-    rethinkdb: {
-      host: 'localhost',
-      port: 28015
-    },
-    es: {
-      host: 'localhost:9200'
-    },
     user: {
       name: 'nukr',
       password: '12345',
@@ -148,16 +104,6 @@ test('array', (t) => {
   process.env.USER_SKILLS = '["programming", "gg"]'
 
   const expected = {
-    app: {
-      port: 12345
-    },
-    rethinkdb: {
-      host: 'localhost',
-      port: 28015
-    },
-    es: {
-      host: 'localhost:9200'
-    },
     user: {
       name: 'nukr',
       password: '12345',
@@ -170,18 +116,8 @@ test('array', (t) => {
   t.deepEqual(target_config, expected)
 })
 
-test('array', (t) => {
+test('invalid array should throws error', (t) => {
   const config = {
-    app: {
-      port: 3000
-    },
-    rethinkdb: {
-      host: 'localhost',
-      port: 28015
-    },
-    es: {
-      host: 'localhost:9200'
-    },
     user: {
       name: 'nukr',
       password: '12345',
@@ -192,4 +128,16 @@ test('array', (t) => {
   // Bad array
   process.env.USER_SKILLS = '["programming", "gg]'
   t.throws(() => { multiconfig(config) }, 'process.env.USER_SKILLS is invalid array error in ["programming", "gg]')
+})
+
+test('float', (t) => {
+  const config = {
+    aa: 1.1
+  }
+  process.env.AA = '1.2'
+  const target_config = multiconfig(config)
+  const expected = {
+    aa: 1.2
+  }
+  t.deepEqual(target_config, expected)
 })
