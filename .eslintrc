@@ -1,4 +1,4 @@
 {
-  "extends": ["nukr-js"],
+  "extends": ["@nukr/eslint-config/js"],
   "plugins": ["flowtype"]
 }
