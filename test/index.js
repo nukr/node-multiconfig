@@ -141,3 +141,27 @@ test('float', (t) => {
   }
   t.deepEqual(target_config, expected)
 })
+
+test('boolean true to false', (t) => {
+  const config = {
+    aa: true
+  }
+  process.env.AA = 'false'
+  const target_config = multiconfig(config)
+  const expected = {
+    aa: false
+  }
+  t.deepEqual(target_config, expected)
+})
+
+test('boolean false to true', (t) => {
+  const config = {
+    aa: false
+  }
+  process.env.AA = 'true'
+  const target_config = multiconfig(config)
+  const expected = {
+    aa: true
+  }
+  t.deepEqual(target_config, expected)
+})
