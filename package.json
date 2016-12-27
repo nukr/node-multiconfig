@@ -1,6 +1,6 @@
 {
   "name": "@nukr/multiconfig",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "multiconfig for node",
   "main": "dist/index.js",
   "scripts": {
