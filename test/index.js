@@ -165,3 +165,27 @@ test('boolean false to true', (t) => {
   }
   t.deepEqual(target_config, expected)
 })
+
+test('number is zero', (t) => {
+  const config = {
+    aa: 3
+  }
+  process.env.AA = 0
+  const target_config = multiconfig(config)
+  const expected = {
+    aa: 0
+  }
+  t.deepEqual(target_config, expected)
+})
+
+test('not match number type', (t) => {
+  const config = {
+    aa: 3
+  }
+  process.env.AA = 'I am not number'
+  const target_config = multiconfig(config)
+  const expected = {
+    aa: 3
+  }
+  t.deepEqual(target_config, expected)
+})
